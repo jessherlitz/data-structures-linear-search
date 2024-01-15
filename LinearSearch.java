@@ -15,11 +15,12 @@ public class LinearSearch {
 
     System.out.println(cmp);
 
-    int[] array = {1,-2,-3,4,6,-2,-100,0};
+    int[] array = {1,2,3,4,6,2,100,0};
 
     
     System.out.println("Num of negatives: " + numOfNegatives(array));
     System.out.println("Min: " + findMin(array));
+    System.out.println("SEARCH: " + search(array,5));
 
   }
    
@@ -69,4 +70,17 @@ public class LinearSearch {
 
       return min;
     }
+
+    public static int search(int[] a, int target) {
+      int i = 0;
+      while ((a[i] != target) && (i < a.length)) {
+          i++;
+      }
+      if (a[i] == target) {
+          return i;
+      }
+      else {
+          return -1;
+      }
+  }
 }
