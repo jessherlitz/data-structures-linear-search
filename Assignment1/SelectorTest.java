@@ -23,7 +23,7 @@ public class SelectorTest {
    @Test
    public void testMin2() {
       int[] a = {1, 1, 1, 1};
-
+   
    
       int expected = 1;
       int actual = Selector.min(a);
@@ -64,7 +64,7 @@ public class SelectorTest {
    @Test
    public void testMin6() {
       int[] a = {1, -1, -1};
-
+   
       int expected = -1;
       int actual = Selector.min(a);
       assertEquals(expected, actual);
@@ -84,21 +84,21 @@ public class SelectorTest {
    @Test
    public void testMin8() {
       int[] a = {1, 1, -5};
-
+   
       int expected = -5;
       int actual = Selector.min(a);
       assertEquals(expected, actual);
    }
 
    @Test (expected = IllegalArgumentException.class)
-   public void throwsException() {
+   public void throwsExceptionMin() {
       int[] a = null;
       int[] b = {};
-
+   
       Exception expected = new IllegalArgumentException();
       int actual = Selector.min(a);
       assertEquals(expected, actual);
-
+   
       int actual2 = Selector.min(b);
       assertEquals(expected, actual2);
    }
@@ -116,7 +116,7 @@ public class SelectorTest {
    @Test
    public void testMax() {
       int[] a = {1, 1, 1, 1};
-
+   
    
       int expected = 1;
       int actual = Selector.max(a);
@@ -157,7 +157,7 @@ public class SelectorTest {
    @Test
    public void testMax7() {
       int[] a = {1, -1, -1};
-
+   
       int expected = 1;
       int actual = Selector.max(a);
       assertEquals(expected, actual);
@@ -177,21 +177,21 @@ public class SelectorTest {
    @Test
    public void testMin9() {
       int[] a = {1, 1, -5};
-
+   
       int expected = 1;
       int actual = Selector.max(a);
       assertEquals(expected, actual);
    }
 
    @Test (expected = IllegalArgumentException.class)
-   public void throwsException2() {
+   public void throwsExceptionMax() {
       int[] a = null;
       int[] b = {};
-
+   
       Exception expected = new IllegalArgumentException();
       int actual = Selector.max(a);
       assertEquals(expected, actual);
-
+   
       int actual2 = Selector.max(b);
       assertEquals(expected, actual2);
    }
@@ -199,7 +199,7 @@ public class SelectorTest {
    @Test
    public void testCeiling1() {
       int[] a = {-2, 10, 15, 3, 19, 9 , 8, 5};
-
+   
       int expected = 8;
       int actual = Selector.ceiling(a, 7);
       assertEquals(expected, actual);
@@ -208,7 +208,7 @@ public class SelectorTest {
    @Test
    public void testCeiling2() {
       int[] a = {2, 8, 7, 3, 4};
-
+   
       int expected = 2;
       int actual = Selector.ceiling(a, 1);
       assertEquals(expected, actual);
@@ -217,7 +217,7 @@ public class SelectorTest {
    @Test
    public void testCeiling3() {
       int[] a = {5, 9, 1, 7, 3};
-
+   
       int expected = 7;
       int actual = Selector.ceiling(a, 7);
       assertEquals(expected, actual);
@@ -226,7 +226,7 @@ public class SelectorTest {
    @Test
    public void testCeiling4() {
       int[] a = {8, 7, 6, 5, 4};
-
+   
       int expected = 4;
       int actual = Selector.ceiling(a, 0);
       assertEquals(expected, actual);
@@ -235,16 +235,29 @@ public class SelectorTest {
    @Test
    public void testCeiling5() {
       int[] a = {8, 2, 8, 7, 3, 3, 4};
-
+   
       int expected = 7;
       int actual = Selector.ceiling(a, 5);
       assertEquals(expected, actual);
    }
 
+   @Test (expected = IllegalArgumentException.class)
+   public void throwsExceptionCeiling() {
+      int[] a = null;
+      int[] b = {};
+   
+      Exception expected = new IllegalArgumentException();
+      int actual = Selector.ceiling(a, 1);
+      assertEquals(expected, actual);
+   
+      int actual2 = Selector.ceiling(b, 1);
+      assertEquals(expected, actual2);
+   }
+
    @Test
    public void testFloor1() {
       int[] a = {2, 8, 7, 3, 4};
-
+   
       int expected = 4;
       int actual = Selector.floor(a, 6);
       assertEquals(expected, actual);
@@ -253,7 +266,7 @@ public class SelectorTest {
    @Test
    public void testFloor2() {
       int[] a = {5, 9, 1, 7, 3};
-
+   
       int expected = 1;
       int actual = Selector.floor(a, 1);
       assertEquals(expected, actual);
@@ -262,7 +275,7 @@ public class SelectorTest {
    @Test
    public void testFloor3() {
       int[] a = {8, 7, 6, 5, 4};
-
+   
       int expected = 8;
       int actual = Selector.floor(a, 9);
       assertEquals(expected, actual);
@@ -271,9 +284,94 @@ public class SelectorTest {
    @Test
    public void testFloor4() {
       int[] a = {8, 2, 8, 7, 3, 3, 4};
-
+   
       int expected = 4;
       int actual = Selector.floor(a, 5);
       assertEquals(expected, actual);
    }
+
+   @Test (expected = IllegalArgumentException.class)
+   public void throwsExceptionFloor() {
+      int[] a = null;
+      int[] b = {};
+   
+      Exception expected = new IllegalArgumentException();
+      int actual = Selector.floor(a, 1);
+      assertEquals(expected, actual);
+   
+      int actual2 = Selector.floor(b, 1);
+      assertEquals(expected, actual2);
+   }
+
+   @Test
+   public void testKMin1() {
+      int[] a = {2, 8, 7, 3, 4};
+   
+      int expected = 2;
+      int actual = Selector.kmin(a, 1);
+      assertEquals(expected, actual);
+   }
+
+   @Test
+   public void testKMin2() {
+      int[] a = {5, 9, 1, 7, 3};
+   
+      int expected = 5;
+      int actual = Selector.kmin(a, 3);
+      assertEquals(expected, actual);
+   }
+
+   @Test
+   public void testKMin3() {
+      int[] a = {8, 7, 6, 5, 4};
+   
+      int expected = 8;
+      int actual = Selector.kmin(a, 5);
+      assertEquals(expected, actual);
+   }
+
+   @Test
+   public void testKMin4() {
+      int[] a = {8, 2, 8, 7, 3, 3, 4};
+   
+      int expected = 4;
+      int actual = Selector.kmin(a, 3);
+      assertEquals(expected, actual);
+   }
+   
+   @Test
+   public void testKMax1() {
+      int[] a = {2, 8, 7, 3, 4};
+   
+      int expected = 8;
+      int actual = Selector.kmax(a, 1);
+      assertEquals(expected, actual);
+   }
+
+   @Test
+   public void testKMax2() {
+      int[] a = {5, 9, 1, 7, 3};
+   
+      int expected = 5;
+      int actual = Selector.kmax(a, 3);
+      assertEquals(expected, actual);
+   }
+
+   @Test
+   public void testKMax3() {
+      int[] a = {8, 7, 6, 5, 4};
+   
+      int expected = 4;
+      int actual = Selector.kmax(a, 5);
+      assertEquals(expected, actual);
+   }
+
+   @Test
+   public void testKMax4() {
+      int[] a = {8, 2, 8, 7, 3, 3, 4};
+   
+      int expected = 4;
+      int actual = Selector.kmax(a, 3);
+      assertEquals(expected, actual);
+   } 
 }
