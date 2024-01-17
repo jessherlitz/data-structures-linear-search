@@ -75,15 +75,20 @@ public final class Selector {
    public static int kmin(int[] a, int k) 
     throws IllegalArgumentException {
    
-        if ((a == null) || (a.length == 0)) {
-            throw new IllegalArgumentException();
-        } 
+      if ((a == null) || (a.length == 0) || (k < 1) || (k > a.length)) {
+         throw new IllegalArgumentException();
+      } 
 
-        int[] sortedArray = Arrays.copyOf(a, a.length);
+      int[] newArr = Arrays.copyOf(a, a.length);
+      
+      Arrays.sort(newArr);
+      newArr = Arrays.stream(newArr).distinct().toArray();
 
-        Arrays.sort(sortedArray);
+      if (k > newArr.length) {
+         throw new IllegalArgumentException(); 
+      }
 
-        return sortedArray[k - 1];
+      return newArr[k - 1];
    }
 
 
@@ -98,13 +103,20 @@ public final class Selector {
    public static int kmax(int[] a, int k) 
     throws IllegalArgumentException {
     
-        if ((a == null) || (a.length == 0)) {
-            throw new IllegalArgumentException();
-        } 
+      if ((a == null) || (a.length == 0) || (k < 1) || (k > a.length)) {
+         throw new IllegalArgumentException();
+      } 
 
-        Arrays.sort(a);
+      int[] newArr = Arrays.copyOf(a, a.length);
+      
+      Arrays.sort(newArr);
+      newArr = Arrays.stream(newArr).distinct().toArray();
 
-        return a[a.length - k];
+      if (k > newArr.length) {
+         throw new IllegalArgumentException(); 
+      }
+   
+      return newArr[newArr.length - k];
    }
 
 
@@ -131,6 +143,12 @@ public final class Selector {
          if ((a[i] >= low) && (a[i] <= high)) {
             count++;
          }
+      }
+
+      int[] emptyArr = {};
+
+      if (count == 0) {
+         return emptyArr;
       }
    
       int[] newArr = new int[count];
@@ -171,6 +189,11 @@ public final class Selector {
             result = a[i];
          }
       }
+      
+      if (result == Integer.MAX_VALUE) {
+         throw new IllegalArgumentException();
+      }
+   
       return result;
    }
 
@@ -200,6 +223,11 @@ public final class Selector {
             result = a[i];
          }
       }
+
+      if (result == Integer.MIN_VALUE) {
+         throw new IllegalArgumentException();
+      }
+
       return result;
    }
 
